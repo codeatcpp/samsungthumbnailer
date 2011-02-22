@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 # gen_thumbs.sh - generates thumbnails for Samsung TVs
 
 # define "constants"
@@ -12,7 +12,7 @@ create_file_thumb ()
   FILENAME=$1
   # get file size in bytes
   printf "$FILENAME\t"
-  FILESIZE=$(stat -c%s "$FILENAME" 2>/dev/null)
+  FILESIZE=$( stat -c%s "$FILENAME" 2>/dev/null )
   if [ $? -ne 0 ] ; then
 	  echo "[FAIL]" # no file or access denied
 	  return $E_FAIL
@@ -22,7 +22,7 @@ create_file_thumb ()
   if [ $FILESIZE -lt 4294967296 ] ; then
 	  EXT=$(( $FILESIZE / 1000 ))
   else
-	  EXT=$(( ($FILESIZE - 4294967296) / 1000))
+	  EXT=$(( ($FILESIZE - 4294967296) / 1000 ))
   fi
 
   NEWFN="${FILENAME%.*}.$EXT"
@@ -57,17 +57,18 @@ elif [ -d "$1" ] ; then # process directory
   SKIPPED=0
   count=0
 
-  IFS=$'\n'
+  IFS='
+'
 
   # process each file
   for NAME in $(find $1/ -type f -regex ".*\.\(avi\|mkv\|ts\)$")
   do
-  create_file_thumb "$NAME"
-  ecode=$? # keep exit code here because every command will change $?
-  if [ "${ecode}" -eq $E_FAIL ] ; then let "FAILED+=1"; fi
-  if [ "${ecode}" -eq $S_OK ] ; then let "OK+=1"; fi
-  if [ "${ecode}" -eq $S_SKIPPED ] ; then let "SKIPPED+=1"; fi
-  let "count+=1"
+    create_file_thumb "$NAME"
+    ecode=$? # keep exit code here because every command will change $?
+    if [ "${ecode}" -eq $E_FAIL ] ; then FAILED=$(( $FAILED + 1 )); fi
+    if [ "${ecode}" -eq $S_OK ] ; then OK=$(( $OK + 1 )); fi
+    if [ "${ecode}" -eq $S_SKIPPED ] ; then SKIPPED=$(( $SKIPPED + 1)); fi
+    count=$(( $count + 1 ))
   done
 
   # display results

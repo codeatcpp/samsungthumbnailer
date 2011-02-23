@@ -1,0 +1,17 @@
+#summary Brief user manual.
+
+= Introduction =
+
+The reason for creation of this project is that Samsung TVs are use poor algorithm for generating thumbnails for USB attached devices as well as for mounted Samba shares (which are could be mounted using Samygo project). This project tries to automatize the process of generation thumbnails.
+
+= Usage =
+
+You could start the script from command line to process one file as follows:
+{{{
+.\gen_thumbs.sh /media/Video/test.avi
+}}}
+
+To process the directory recursively:
+{{{
+.\gen_thumbs.sh /media/Video
+}}}

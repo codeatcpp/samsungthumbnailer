@@ -14,3 +14,5 @@ You could start the script from command line to process one file as follows:
 
 To process the directory recursively:  
 ```./gen_thumbs.sh /media/Video```
+
+A bit more info in Russian one can find here: http://www.codeatcpp.com/2011/02/bash.html

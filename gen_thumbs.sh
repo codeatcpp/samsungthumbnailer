@@ -1,5 +1,7 @@
 #!/bin/sh
 # gen_thumbs.sh - generates thumbnails for Samsung TVs
+# Author: Kirill V. Lyadvinsky (www.codeatcpp.com)
+# License: GPL v2
 
 # define "constants"
 S_OK=0
